@@ -1,0 +1,1246 @@
+/*importation fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sml-fat-marker');
+@font-face {
+    font-family: "Helveticamed";
+    src: url(../fonts/helveticaneue/HelveticaNeueMed.ttf);
+}
+@font-face {
+    font-family: "Helveticahv";
+    src: url(../fonts/helveticaneue/HelveticaNeueHv.ttf);
+}
+@font-face {
+    font-family: "Helvetica Neue Light";
+    src: url(../fonts/helveticaneue/HelveticaNeueLt.ttf);
+}
+/*fin importation*/
+/*variables+mixin*/
+$fontgen: "Helvetica Neue Light",sans-serif;
+$fontart:'Helveticahv', sans-serif; 
+$fontb:'Fredoka', sans-serif;
+$helveticamed:'Helveticamed',sans-serif;
+$colortext:#ffffff;
+$colorbis:#70FFDD;
+$colorlineup:#77CABB;
+$borderbutton: solid 1px #70FFDD;
+$backgroundcolor:#252525;
+$transition:all 0.5s;
+@mixin background{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@mixin flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/*fin variables+mixin*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-margin-top: 10vh;
+}
+
+html,body{
+    scroll-behavior: smooth;
+    font-family: $fontgen;   
+    height: 100%;
+}
+.slide{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-color: $backgroundcolor;
+    color: $colortext;
+}
+
+.wrapper{
+    width: 85%;
+    margin: 0 auto;
+    @media all and (max-width: 992px){
+       width: 90%;
+      } 
+    .left &{
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        @media all and (max-width: 992px){
+            min-height: 50vh ;
+            align-items: center;
+            display: flex;
+        }
+    }
+}
+/*SLIDE HOME*/
+.left,.right{
+    width: 50%;
+    min-height: 100vh;
+    @media all and (max-width: 992px){
+        background-color: $backgroundcolor;
+        width: 100%;
+    } 
+}
+#home{
+    background-image: url(../images/fonds/bg_home.png);
+    @include background();
+    display: flex;
+    flex-wrap: wrap;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.left{
+    @media all and (max-width: 992px){
+        min-height: 50vh !important;
+    } 
+}
+/*HEADER+NAV*/
+header {
+    width: 100%;
+    background-color: $backgroundcolor;
+    @include flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    min-height: 10vh;
+    .logo {
+        width: 50%;
+        display: flex;
+
+    a, img {
+        width: 40px;
+        margin-left: 6%;
+        @media all and (max-width: 992px) and (orientation: landscape) {
+            margin:1% 0 1% 6%;
+        }
+    }
+  }
+  nav{
+    width: 45%;
+    height: 10vh;
+    ul{
+      display: flex;
+      list-style: none;
+      li{
+        flex: 1;
+        text-align: center;
+        &:hover ul {
+          display: flex;
+        }
+        ul{
+          flex-direction: column;
+          display: none;
+          z-index: 3;
+          background-color: $backgroundcolor;
+        }
+        a{
+          text-decoration: none;
+          color: $colortext;
+          display: block;
+          line-height: 10vh;
+          transition: $transition;
+          &:hover, &.active {
+            background-color: $colorbis;
+            color: $backgroundcolor;
+          }
+        }
+      }
+    }
+  }
+}
+/*BURGER*/
+#burger{
+    display: none;
+    width: 50px;
+    cursor: pointer;
+    position: fixed;
+    right: 4%;
+    top: 3%;
+    z-index: 200;
+    .bar{
+        width: 100%;
+        height: 3px;
+        margin: 8px 0;
+        background-color:$colortext;
+        transition: $transition;
+    }
+}
+#burger.open-burger .bar:nth-child(1){
+    background-color: $colortext;
+    transform: translate(0px,11px) rotate(45deg)
+}
+#burger.open-burger .bar:nth-child(2){
+    opacity: 0;
+}
+#burger.open-burger .bar:nth-child(3){
+    background-color: $colortext;
+    transform: translate(0px,-11px) rotate(-45deg)
+}
+#menuMobile{
+    width: 100%;
+    height: 100vh;
+    background-color: $backgroundcolor;
+    @include flex();
+    position: fixed;
+    left: -100%;
+    z-index: 100;
+    transition: $transition;
+    nav ul{
+       list-style: none;
+       li{
+           margin: 30px 0;
+           text-align: center;
+           a{
+              color: $colortext;
+              text-decoration: none;
+              font-size: 2.5em;
+              &:focus{
+                color: $colorbis;
+              }
+            }
+        }
+    }
+}
+.open-menu{
+    left: 0!important; /* id vs class */
+}
+
+@media all and (max-width: 992px){
+    header nav{
+        display: none;
+    }
+    #burger{
+        display: block;
+    }
+    #menuMobile nav ul li{
+        margin: 60px 0;
+    }
+    
+    #menuMobile nav ul li a{
+        font-size: 2em;
+    }
+}
+@media all and (max-width: 992px) and (orientation: landscape) {
+    #menuMobile nav ul li a{
+        font-size: 1em;
+    }
+  }
+/*****************************FIN BURGER******************************/
+/****************************** FINHEADER+NAV******************************/
+
+/******************************SLIDE HOME******************************/
+.btn-billet{
+    width: 60px;
+    height: 60px;
+   @include flex();
+    background-color: $colorbis;
+    border-radius: 50% 50%;
+    position: fixed;
+    top: 15%;
+    right: 1%;
+    text-decoration: none;
+    color: $backgroundcolor;
+    transition: $transition;
+    z-index: 100;
+    box-shadow: 0 0 25px $backgroundcolor;
+    &:hover{
+        background-color: $backgroundcolor;
+        color: $colorbis;
+        border: solid 1px $colorbis;
+    }
+    i{
+        font-size: 2em;
+        transform: rotate(-45deg);
+    }
+}
+
+.jumbotron{
+    width: 85%; 
+    @media all and (max-width: 992px) {
+      width: 100%;
+      margin: 0 auto;
+    } 
+    h2{
+      font-style: italic;
+      font-weight: lighter;
+      text-align: center;
+      position: relative;
+      margin-bottom: 20px;
+      animation: reveal 1s forwards; 
+      &::before{
+        content: '';
+        position: absolute;
+        width: 38%;
+        height: 2px;
+        background-color: $colorbis;
+        left: -15%;
+        font-family: $fontgen;
+        font-weight: 100;
+        bottom: 50%;
+      }
+    }
+    img{
+      width: 80%;
+      @include flex();
+      animation: reveal 1s forwards;
+      animation-delay: 1s;
+      opacity: 0;
+      margin-bottom: 40px;
+      @media all and (max-width: 992px) {
+        width: 100%;
+      }
+    }
+    p{
+      margin: 40px 0;
+      line-height: 4rem;
+      animation: reveal 1s forwards;
+      animation-delay: 1.5s;
+      font-family: $fontb;
+      opacity: 0;
+      font-size: 2.88em;
+      &::after,&::before {
+        position: relative;
+        content: ' " ';
+        color: $colorbis;
+      }
+      @media all and (max-width: 758px) {
+        font-size: 8vw;
+        line-height: 2.5rem;
+      }
+    }
+    
+    @keyframes reveal {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+}
+.zone-btn{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    @media all and (max-width: 1200px){
+        width: 90%;
+        margin-bottom: 40px;
+    } 
+    @media all and (max-width: 992px){
+        width: 100%;
+    } 
+    .btn{
+        position: relative;
+        overflow: hidden;
+        outline:  $borderbutton;
+        padding: 15px 60px;
+        text-decoration: none;
+        color: $colortext;
+        transition: color 1s;
+        animation: reveal 1s forwards ;
+        animation-delay: 1.8s;
+        opacity: 0;
+        &:hover{
+            text-decoration: none;
+            color: $backgroundcolor;
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50px;
+            z-index: -1;
+            width: 150%;
+            height: 101%;
+            color: $backgroundcolor;
+            transform: scalex(0) skewX(30deg);
+            transform-origin: left;
+            transition: transform 1s;
+            background-color: $colorbis;
+            text-decoration: none;
+        }
+        &:hover::before{
+            transform: scaleX(1) skewX(30deg);
+            text-decoration: none;
+        }  
+    }
+}
+.right{
+    position: relative;
+    @media all and (max-width: 992px){
+        order: -5;
+        min-height: 70vh !important;
+    } 
+    img{
+        height: 100%;
+        animation: reveal 4s forwards;
+        animation-delay: 0.5s;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+       @media all and (max-width:1440px) {
+        height: 70vh;
+       }
+       @media all and (max-width: 1025px){
+          height: 50vh;
+        } 
+       @media all and (max-width: 458px){
+          height: 50vh;
+        } 
+    }
+    @keyframes dinos{
+       from{
+            transform: translate(20%,0);
+            opacity: 0;
+        }
+       to{
+            transform: translate(0px) ;
+            opacity: 1;
+        }
+    }
+}
+
+.dates{
+    position: absolute;
+    top: 45%;
+    right: 0;
+    font-size: 3em;
+    animation: dinos 1.5s forwards ;
+    color: $colorbis;
+    font-family: $fontb;
+    @include flex();
+    font-weight: 600;
+    width: 100%;
+    opacity: 0;
+    p{
+        flex: 2;
+        margin: 2%;
+        text-align: center;
+    }
+    hr{
+        color: $colorbis;
+        border-radius: 20px;
+        border: solid 2px;
+        z-index: -9;
+        flex:1;
+    }
+  
+    @media all and (max-width: 992px){
+        @include flex();
+        top: 0;
+        margin: auto;
+        min-height: 80vh;
+        font-size: 7vw;
+      } 
+      @keyframes opa{
+        from{  
+             opacity: 0;
+         }
+        to{
+             opacity: 1;
+         }
+     }
+}
+/******************************FIN HOME******************************/
+/******************************PRESENTATION******************************/
+#presentation{
+    h2{
+        text-align: center;
+        font-family: $fontb;
+        font-weight: normal;
+        font-size: 45px;
+        padding: 40px 0;
+    }
+    .block-pres{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        .pics,.text-block{
+            width: 50%;
+            @media all and (max-width: 768px){
+                width: 100%;
+                margin-bottom: 40px ;
+            } 
+        }
+        .text-block{
+            line-height: 32px;
+            p{
+                margin-top: 20px;
+                margin-right: 5%;
+            }
+        }
+        .pics{
+            img{
+                width: 90%;
+            }
+        }
+    }
+    .bandeaux-infos{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 80px 0;
+        text-align: center;
+        .info{
+            p:nth-child(1){
+                font-size: 60px;
+                color: $colorbis;
+                margin-bottom: 40px;
+                @media all and (max-width: 768px){
+                  font-size: 45px;
+                } 
+            }
+            p:nth-child(2){
+                font-size: 40px;
+                padding-bottom: 40px;
+                @media all and (max-width: 768px){
+                    font-size: 25px;
+                    } 
+            }
+        }
+    }
+}
+/******************************PROGRAMME******************************/
+#programme{
+    background-image: url(../images/fonds/bg_programme.png);
+    background-position: center bottom;
+    background-attachment: fixed;
+}
+.title{
+    padding: 40px 0;
+    text-align: center;
+    font-size: 40px;
+    font-family: $fontb;
+    font-weight: lighter;
+}
+.alldays{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @media all and (max-width: 992px)
+    {
+        grid-template-columns: 1fr 1fr ;
+    }
+    @media all and (max-width: 798px)
+    {
+        grid-template-columns: 1fr  ;
+    }
+    .day{
+        @include background();
+        min-height: 60vh;
+        margin-top: 20px ;
+        margin-bottom: 20px;
+        @media all and (max-width: 992px)
+        {
+            width: 80%;
+            margin: auto;
+            margin-top: 40PX;
+        }
+        @media all and (max-width: 752px){
+            width: 100%; 
+        }
+    h3{
+        margin-top: 20px;
+        text-align: center;
+        font-size: 24px;
+    }
+    h4{
+        text-align: center;
+        color: $colorbis;
+        font-size: 20px;
+        font-weight: normal;
+        margin-bottom: 40px;
+    }
+    p{
+        margin: 20px 0;
+        font-size: 28px;
+        text-align: center;
+        font-family: $fontart;
+       
+    }
+    p:nth-child(even){
+        color: $colorbis;
+    }
+    .btn-lineup{
+        margin-bottom: 20px;
+        margin-top: 60px;
+        @include flex();
+        a{
+            width: 100%;
+            padding: 20px 20px;
+            background-color: $colorlineup;
+            color: $colortext;
+            text-align: center;
+            text-decoration: none;
+            transition: $transition;
+            font-family: $fontb;
+            &:hover{
+                background-color: $colortext;
+                color: $colorlineup;
+            }
+        }
+    }
+} 
+   #day1{
+        background-image: url(../images/artistes/Tiako.png)
+   }
+   #day2{
+        background-image: url(../images/artistes/damso.png);
+        p:nth-child(odd){
+            color: $colorbis;
+        }
+        p:nth-child(even){
+            color: $colortext;
+        }
+    }
+   #day3{
+        background-image: url(../images/artistes/2pac.png);
+   }
+}
+.bandeau{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    min-height: 20px;
+    width: 100%;
+    background-color:$backgroundcolor;
+    padding: 40px 0;
+    .txt{
+        white-space: nowrap;
+        font-size: 48px;
+        font-weight: bold;
+        animation: scroll 4s linear reverse ;
+        animation-iteration-count: infinite;
+        display: flex;
+        user-select: none;
+        font-family:$fontb;
+        color: $colorbis;
+        p:nth-child(odd){
+            color: $backgroundcolor;
+            -webkit-text-stroke: 1px $colorbis;
+         }
+         @keyframes scroll{
+             from{
+                 transform: translate(-100%,0);
+             }
+             to{
+                 transform: translate(0);
+             }
+         }
+    }
+}
+/*SLIDE LINEUP*/
+.group-lu{
+    width: 100%;
+    h3{
+        font-size: 24px;
+        font-weight: normal;
+        margin-bottom: 5%;
+        position: relative;
+        &::after{
+            content:"";
+            position: absolute;
+            width: 80%;
+            background-color: $colorbis;
+            bottom: -50%;
+            left: 0%;
+            height: 4px;
+        }
+    }
+    .lineupartistes{
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 5%;
+        a{
+            text-decoration: none;
+            color: transparent;
+            -webkit-text-stroke: 1px $colorbis;
+            font-family: $fontart;
+            font-size: 80px;
+            margin-right: 1%;
+            transition: all 0.1s;
+            @media all and (max-width: 992px){
+                font-size: 10vw;
+               }
+        
+            &:hover,&:active{
+                color: $colorbis;
+            }
+        }
+    }
+}
+.slider {
+    width: 100%;
+    min-height: 300px;
+    position: relative;
+    overflow: hidden;
+    @media all and (max-width: 992px){
+        min-height: 20vh;;
+    }
+    .bandeau{
+        opacity: 0;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: opacity 0.5s ease-in-out  ;
+        min-height: 300px;
+        @media all and (max-width: 992px){
+            min-height: 20vh;;
+        }
+        &.active {
+            z-index: 1.5;
+            opacity: 1;
+      }
+      img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+/******************************FIN PROGRAMME LINEUP******************************/
+/******************************DEBUT INFOS PRATIQUES******************************/
+#infos h2{
+    padding: 40px 0;
+    margin-bottom: 40px;
+    width: 100%;
+    text-align: center;
+}
+.block-infos{
+    min-height: 550px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .block-pres,.block-pics{
+        width: 50%;
+        min-height: 550px;
+        iframe{
+            min-height: 550px;
+            width: 100%;
+        }
+    }
+    .block-pres{
+        flex-direction: column;
+        display: flex;
+        h3{
+            text-align: center;
+            font-size: 35px;
+            font-family: $fontb;
+            margin: 20px 0;
+        }
+        .line{
+            display: flex;
+            height: 50px;
+            align-items: center;
+            width: 100%;
+            margin-left: 5%;
+            margin-bottom: 10%;
+            .icon{
+                width: 60px;
+                height: 60px;
+                background-color: $colorbis;
+                @include flex();
+                border-radius: 50% 50%;
+                transition: $transition;
+                font-size: 30px;
+                margin-right: 5%;
+                color: $backgroundcolor;
+                &:hover{
+                    box-shadow: 0px 0px 15px $colorbis;
+                }
+            }
+        }
+    }
+
+}
+.alltarifs{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    color: $backgroundcolor;
+    gap: 40px;
+    .tarif1{
+        margin-top: 20px;
+        width: 250px;
+        height: 400px;
+        background-color: $colorbis;
+        border-radius: 10px;
+        p{
+            margin-top: 40px;
+            font-family: $helveticamed;
+        }
+        p:nth-child(1){
+            text-align: center;
+            text-transform: uppercase;
+            font-family: $fontart
+        }
+       ul{
+        width: 85%;
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 0 10px;
+        li{
+            margin-top: 5%;
+        }
+       }
+        p:nth-child(3){
+            text-align: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+    }
+}
+.block-pres{
+    .zone-btn{
+        @include flex();
+        margin-top: 40px;
+        a{
+            width: 80%;
+            height: 50px;
+            opacity: 1;
+            @include flex(); 
+            animation-delay: 0s;
+            animation-duration: 0s ;  
+        }
+    }
+}
+#picstarif{
+        background-image: url(../images/fonds/images\ tarif.png);
+        @include background();
+}
+.partenaires{
+    text-align: center;
+    margin-top: 40px;
+    width: 100%;
+    h3{
+        font-family: $fontb;
+        font-size: 35px;
+    }
+    .all{
+        padding: 40px 0; 
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        img{
+            transition: $transition;
+            margin: auto;
+            width: 20%;
+            @media all and (max-width: 992px)
+            {
+                width: 20%;
+            }
+        }
+        svg{
+            width: 20%;
+            margin: auto;
+            transition: $transition;
+          
+             @media all and (max-width: 992px)
+            {
+                width: 20%;
+            }
+        
+        }
+    }
+}
+@media all and (max-width: 992px){
+    #block1{
+        .block-pics,.block-pres{
+            width: 100%;
+        }
+        .block-pres{
+            order: -5;
+        }
+        .block-pics{
+            min-height: 350px;
+        }
+        iframe{
+            min-height: 350px;
+            margin-bottom: 40px
+        }
+    }
+    #block2{
+        .block-pics{
+            display: none;
+        }
+        .block-pres{
+            width: 100%;
+            background-image: url(../images/fonds/images\ tarif.png);
+            @include background();
+            }
+    }
+}
+/******************************FIN INFOS******************************/
+/******************************GALERIE******************************/
+#gallery {
+    h2 {
+      text-align: left;
+    }
+    .cards-container {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      place-items: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      @media all and (max-width: 1200px) {
+        grid-template-columns: 1fr 1fr;
+      }
+  
+      @media all and (max-width: 580px) {
+        grid-template-columns: 1fr;
+      }
+  
+      .flip-card {
+        width: 80%;
+        height: 60vh;
+        perspective: 1000px;
+        background-color: transparent;
+        cursor: pointer;
+        padding-bottom: 40px;
+       
+  
+        &:hover .flip-card-inner {
+          @media not all and (max-width: 1200px) {
+            &:not(.active) {
+              transform: rotateY(180deg);
+            }
+          }
+        }
+  
+        @media all and (max-width: 992px) {
+          height: 400px;
+          width: 100%;
+        }
+  
+        @media all and (min-height: 950px) {
+          height: 400px;
+        }
+  
+        .flip-card-inner{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: $transition;
+            transform-style: preserve-3d;
+        }
+  
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .flip-card-front{
+            border-radius: 25px 0px;
+            @include background();
+        }
+  
+        .flip-card-back{
+            border-radius: 0px 25px;
+            background-color: $backgroundcolor;
+            transform: rotateY(180deg);
+            box-shadow: 0px 0px 10px $colorbis;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            h3,p{
+                text-align: center;
+            }
+            h3{
+                font-weight: normal;
+                font-family: $fontart;
+                font-size: 25px;
+                color: $colorbis;
+            }
+            p:nth-child(2) {
+                font-family: $fontart;
+                font-size: 20px;
+            }
+            p:nth-child(3),p:nth-child(4) {
+                width: 85%;
+                margin: 0 auto;
+                font-style: italic;
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+        }
+      }
+    }
+  }
+
+#nepal{ background-image: url(../images/artistes/nepal.png);}
+#kingvon{background-image: url(../images/artistes/kingvon.png);}
+#xxxtentacion{background-image: url(../images/artistes/xxxtentacion.png);}
+#luvresval{background-image: url(../images/artistes/luv.png);}
+#lilpeep{background-image: url(../images/artistes/lilpeep.png);}
+#takeoff{background-image: url(../images/artistes/takeoff.png);}
+#juicewrld{background-image: url(../images/artistes/juicewrld.png);}
+#popsmoke{background-image: url(../images/artistes/popsmoke.png);}
+#biggie{background-image: url(../images/artistes/biggie.png);}
+#tpac{background-image: url(../images/artistes/tupaco.png);}
+/******************************FIN GALERIE******************************/
+/******************************CONTACT******************************/
+#contact{
+    background-image: url(../images/fonds/bg_contact.png);
+    @include background();
+    background-attachment: fixed;
+    min-height: auto;
+}
+#all{
+    display: flex;
+    align-items: center;
+    min-height: 800px;
+    justify-content: center;
+ }
+ form{
+    background: linear-gradient(180deg, rgba(66, 66, 66, ) 0%, rgba(28, 61, 62, ) 86.04%, rgba(22, 60, 61, ) 100%);
+    min-height: 500px;
+    width: 70%;
+    border-radius: 20px;
+    box-shadow: 0 0 25px $backgroundcolor;
+    padding-bottom: 10px;
+    @media all and (max-width: 992px)
+    {
+        width: 100%;
+    }
+    h2{
+       font-size: 40px;
+       font-weight: normal;
+       margin-left: 20px;
+       padding-top: 40px;
+       font-family: $fontb;
+    }
+    .form-group{
+        margin-top: 30px;
+         input, textarea{
+            width: 80%;
+            margin-left: 20px;
+            margin-bottom: 40px;
+            font-size: 18px;
+            font-weight: lighter;
+            background-color: transparent;
+            color: $colortext;
+            border: none;
+            padding-left: 5px;
+            padding-bottom: 5px;
+            box-sizing: border-box;
+            border-bottom: solid 1px $colorbis;
+            border-left: solid 1px $colorbis;
+            font-family: $fontgen;
+            &:focus{
+                outline: none;
+            }
+            }
+            textarea{
+                height: 120px;
+                resize: none;
+            }
+            placeholder{
+                color: $colortext;
+            }
+    
+        }
+        button{  
+            text-decoration: none;
+            background-color: $colorbis;
+            outline: none;
+            text-align: center;
+            padding: 10px 40px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            font-family: $helveticamed;
+            color: $backgroundcolor
+            ;
+            position: relative;
+            border-radius: 10px;
+            
+        }
+        button::before{
+            content: "" ;
+            position: absolute;
+            height: 0;
+            width: 0;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, $backgroundcolor 0%,$backgroundcolor 50%, white 50%, white 60%);
+            border-radius: 0 0 8px 0 ;
+            box-shadow: 8px 8px 8px #0000004d;
+            transition: 0.3s ;
+            
+        }
+        button:hover::before{
+            width: 18px;
+            height: 18px;
+            
+        }
+      
+    #group-btn{
+        display: flex;
+        width: 100%;
+        justify-content: end;
+    }
+}
+/******************************PRESENTATION ARTISTES******************************/
+#artistes{
+    .artistes_pres{
+        min-height: calc(100vh - 10vh);
+        flex-direction: column;
+        display: flex;
+        padding-top: 15vh;
+        h2{
+            font-size: 35px;
+            text-align: center;
+        }
+        .res{
+            text-align: center;
+            margin: 20px 0;
+            a{
+                text-decoration: none;
+                i{
+                    font-size: 24px;
+                    text-align: center;
+                    margin: 0 10px;          
+                    color: $colorbis;
+                }
+            }
+        }
+            p{
+                width: 60%;
+                margin: 0 auto;
+                margin-top: 20px;
+                line-height: 30px;
+                @media all and (max-width: 992px)
+                { 
+                    width: 100%;
+                }
+            }
+            .zone-btn{
+                width: 85%;
+                margin-top: 25px;
+                a{
+                    padding: 20px 10px;
+                }
+            }
+        }
+    }
+footer{
+    background-color: $backgroundcolor;
+    color:$colortext;
+    padding-top: 10px;
+    border-top: solid 5px $colorbis;
+    font-size: 14px;
+    min-height: 50px;
+  
+    .footer_container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 85%;
+        margin: 0 auto;
+    }
+    #footer1{
+        padding: 20px 0;
+        width: 100%;
+        img{
+           height: 60px;
+           margin-right: 4%;
+        }
+        #footertext{
+            display: flex;
+            width: 35%;
+            justify-content: space-between;
+            line-height: 18px;
+            @media all and (max-width: 992px)
+            {  
+                width: 100%;
+                margin: 20px;
+            }
+        }
+        #about,#mentions_legales{
+         p{
+            cursor: pointer;
+            margin-top: 5px;
+         }
+         h4{
+            font-size: 20px;
+            font-weight: normal;
+            font-family: $helveticamed;
+         }
+            
+        }
+        .reseaux{
+            display: flex;
+            align-items: center;
+            a{
+                text-decoration: none;
+                color: $colorbis;
+                font-size: 24px;
+                margin: 0 15px;
+            }
+            @media all and (max-width: 768px)
+            {
+                width: 100%;
+                justify-content: space-between;
+                order: -5;
+                margin: 20px;
+         
+            
+            }
+        }
+    }
+    #footer2{
+        padding: 15px 0;
+        background-color: #1f1e1e;
+        a{
+            text-decoration: none;
+            color: $colortext;
+        }
+        span{
+            color: $colorbis;
+          
+        }
+        @media all and (max-width: 992px)
+        { 
+            display: flex;
+            order: -4;
+        }
+    }
+}
+.totop{
+    display: flex;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    transition: $transition;
+    background-color: $colorbis;
+    box-shadow: 0 0 25px $backgroundcolor;
+ 
+    svg{
+        text-align: center;
+        z-index: 100;
+        fill: $backgroundcolor;
+        height: 45px;
+        transition: $transition;  
+    }
+}
