@@ -539,11 +539,18 @@ header {
         min-height: 60vh;
         margin-top: 20px ;
         margin-bottom: 20px;
+
+        @media all and (max-width: 1024px)
+        {
+            min-height: 35vh;
+            
+        }
         @media all and (max-width: 992px)
         {
             width: 80%;
             margin: auto;
             margin-top: 40PX;
+            
         }
         @media all and (max-width: 752px){
             width: 100%; 
@@ -893,7 +900,6 @@ header {
     }
     .cards-container {
       width: 100%;
-      border-radius: 10px;
       margin-top: 20px;
       padding: 20px;
       display: grid;
@@ -950,17 +956,17 @@ header {
             backface-visibility: hidden;
         }
         .flip-card-front{
-            border-radius: 25px 0px;
             @include background();
+            border-radius: 25px 0px;
         }
   
         .flip-card-back{
-            border-radius: 0px 25px;
             background-color: $backgroundcolor;
             transform: rotateY(180deg);
             box-shadow: 0px 0px 10px $colorbis;
             display: flex;
             flex-direction: column;
+            border-radius: 0px 25px;
             justify-content: space-evenly;
             h3,p{
                 text-align: center;
@@ -984,6 +990,11 @@ header {
             }
         }
       }
+    }
+  }
+  @media all and (max-width: 1200px) {
+    .flip-card.active .flip-card-inner {
+      transform: rotateY(180deg);
     }
   }
 
